@@ -2,10 +2,23 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+// Redux SetUp
+import { applyMiddleware, createStore } from "redux";
+import { Provider } from "react-redux";
+import rootReducer from "./reducers";
+import { composeWithDevTools } from "redux-devtools-extension";
+import ReduxPromise from "redux-promise";
+
+const store = createStore(
+  rootReducer,
+  composeWithDevTools(applyMiddleware(ReduxPromise))
+);
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>,
   document.getElementById("root")
 );
