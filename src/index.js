@@ -9,11 +9,12 @@ import rootReducer from "./reducers";
 import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
 
+// So Thunk is because we use async functions (axios e.g)
 const middleware = [thunk];
 
 const store = createStore(
-  rootReducer,
-  composeWithDevTools(applyMiddleware(...middleware))
+  rootReducer, // I use combine reducers to use multiple reducers
+  composeWithDevTools(applyMiddleware(...middleware)) // I use compose to add devtools combined with thunk
 );
 
 ReactDOM.render(
