@@ -8,6 +8,7 @@ import { Provider } from "react-redux";
 import rootReducer from "./reducers";
 import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
+import { BrowserRouter } from "react-router-dom";
 
 // So Thunk is because we use async functions (axios e.g)
 const middleware = [thunk];
@@ -20,7 +21,9 @@ const store = createStore(
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
     </Provider>
   </React.StrictMode>,
   document.getElementById("root")

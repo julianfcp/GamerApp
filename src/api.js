@@ -46,3 +46,11 @@ export const upcomingGamesURL = () => {
 export const newGamesURL = () => {
   return `${base_url}${new_games}`;
 };
+// Game Details
+export const gameDetailsURL = (id) => {
+  return `${base_url}games/${id}`;
+};
+// Game screenshots
+export const gameScreenShotsURL = (id) => {
+  return `${base_url}games/${id}/screenshots`;
+};

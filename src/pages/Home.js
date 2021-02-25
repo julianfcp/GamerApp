@@ -3,22 +3,31 @@ import { useDispatch, useSelector } from "react-redux";
 import { loadGames } from "../actions/gamesAction";
 //components
 import Game from "../components/Game";
+import GameDetail from "../components/GameDetail";
 // Styled and animations
 import styled from "styled-components";
 import { motion } from "framer-motion";
+// location
+import { useLocation } from "react-router-dom";
 
 const Home = () => {
+  const location = useLocation();
+  const pathId = location.pathname.split("/")[2]; // Get the id from the path
+
   const dispatch = useDispatch();
 
   useEffect(() => {
+    // Fetch the data when the app is mounted
     dispatch(loadGames());
-  }, [dispatch]);
+  }, [dispatch]); // we add the dependency
 
   //get Data from the store
+  // games is the name of the reducer when we use combineReducers
   const { popular, newGames, upComing } = useSelector((state) => state.games);
 
   return (
     <GameList>
+      {pathId && <GameDetail />}
       <h2> Upcoming Games</h2>
       <Games>
         {upComing.map((game) => (
