@@ -11,6 +11,7 @@ const Game = ({ gameId, gameName, released, image }) => {
   //load Details
   const dispatch = useDispatch();
   const handleGameDetail = () => {
+    document.body.style.overflow = "hidden";
     dispatch(loadDetail(gameId));
   };
   // Link to /game/gameId when click the game
@@ -35,6 +36,7 @@ const StyledGame = styled(motion.div)`
   text-align: center;
   border-radius: 1rem;
   cursor: pointer;
+  overflow-y: hidden; // shows rounded edge at the bottom of images
   img {
     width: 100%;
     min-height: 40vh;

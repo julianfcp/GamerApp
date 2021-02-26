@@ -5,6 +5,7 @@ const initState = {
   screen: {
     results: [],
   },
+  isLoading: true,
 };
 
 const gameDetailReducer = (state = initState, action) => {
@@ -14,7 +15,13 @@ const gameDetailReducer = (state = initState, action) => {
         ...state,
         game: action.payload.game, // game comes from action
         screen: action.payload.screen, // screen comes from action
+        isLoading: false, // sets false when data is loaded
       }; // return the state
+    case "DETAIL_LOADING":
+      return {
+        ...state,
+        isLoading: true, // sets true before data is loaded
+      };
 
     default:
       return { ...state };

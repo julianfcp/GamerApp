@@ -4,6 +4,10 @@ import { popularGamesURL, upcomingGamesURL, newGamesURL } from "../api";
 // Action creator
 // when using thunk to async calls we use another function to return
 export const loadGames = () => async (dispatch) => {
+  // set isloading true before data is loaded
+  dispatch({
+    type: "HOME_LOADING",
+  });
   // Fetch with Axios
   const popularData = await axios.get(popularGamesURL());
   const upcomingGamesData = await axios.get(upcomingGamesURL());

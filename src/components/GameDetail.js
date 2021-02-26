@@ -1,44 +1,63 @@
 // Styled and animations
 import styled from "styled-components";
 import { motion } from "framer-motion";
+// Components
+import Loading from "../components/Loading";
 //Redux
 import { useSelector } from "react-redux";
+// Location History
+import { useHistory } from "react-router-dom";
 
 const GameDetail = () => {
+  const history = useHistory();
+  // Exit Detail
+  const exitHandler = (e) => {
+    if (e.target.classList.contains("cardshadow")) {
+      document.body.style.overflow = "auto"; // enables the scroll again
+      history.push("/"); // redirects to home
+    }
+  };
   //Data
-  const { game, screen } = useSelector((state) => state.gameDetail);
+  const { game, screen, isLoading } = useSelector((state) => state.gameDetail);
   return (
-    <CardShadow>
-      <Detail>
-        <Stats>
-          <div className="rating">
-            <h3>{game.name}</h3>
-            <p>Rating: {game.rating}</p>
-          </div>
-          <Info>
-            <h3>Platforms</h3>
-            <Platforms>
-              {game.platforms.map((item) => (
-                <h3 key={item.platform.id}>{item.platform.name}</h3>
+    <>
+      {!isLoading ? (
+        <CardShadow className="cardshadow" onClick={exitHandler}>
+          <Detail>
+            <Stats>
+              <div className="rating">
+                <h3>{game.name}</h3>
+                <p>Rating: {game.rating}</p>
+              </div>
+              <Info>
+                <h3>Platforms</h3>
+                <Platforms>
+                  {game.platforms.map((item) => (
+                    <h3 key={item.platform.id}>{item.platform.name}</h3>
+                  ))}
+                </Platforms>
+              </Info>
+            </Stats>
+            <Media>
+              <img src={game.background_image} alt={game.background_image} />
+            </Media>
+            <Description>{game.description_raw}</Description>
+            <Gallery>
+              {screen.results.map((item) => (
+                <img key={item.id} src={item.image} alt="game" />
               ))}
-            </Platforms>
-          </Info>
-        </Stats>
-        <Media>
-          <img src={game.background_image} alt={game.background_image} />
-        </Media>
-        <Description>{game.description_raw}</Description>
-        <Gallery>
-          {screen.results.map((item) => (
-            <img key={item.id} src={item.image} alt="game" />
-          ))}
-        </Gallery>
-      </Detail>
-    </CardShadow>
+            </Gallery>
+          </Detail>
+        </CardShadow>
+      ) : (
+        <Loading />
+      )}
+    </>
   );
 };
 
 const CardShadow = styled(motion.div)`
+  // shadow transparent background
   width: 100%;
   min-height: 100vh;
   overflow-y: scroll;

@@ -39,6 +39,16 @@ const GlobalStyles = createGlobalStyle`
         text-decoration: none;
         color: #333;
     }
+    img {
+        display: block; // hide white space down the imagaes
+    }
+    .loading {
+        margin-top: 5rem;
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+        
+    }
 
 `;
 
