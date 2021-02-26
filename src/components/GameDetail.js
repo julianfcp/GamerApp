@@ -7,6 +7,8 @@ import Loading from "../components/Loading";
 import { useSelector } from "react-redux";
 // Location History
 import { useHistory } from "react-router-dom";
+// Utils
+import { smallImage } from "../Utils";
 
 const GameDetail = () => {
   const history = useHistory();
@@ -39,12 +41,19 @@ const GameDetail = () => {
               </Info>
             </Stats>
             <Media>
-              <img src={game.background_image} alt={game.background_image} />
+              <img
+                src={smallImage(game.background_image, 720)}
+                alt={game.background_image}
+              />
             </Media>
             <Description>{game.description_raw}</Description>
             <Gallery>
               {screen.results.map((item) => (
-                <img key={item.id} src={item.image} alt="game" />
+                <img
+                  key={item.id}
+                  src={smallImage(item.image, 720)}
+                  alt="game"
+                />
               ))}
             </Gallery>
           </Detail>
