@@ -10,11 +10,14 @@ import { Link } from "react-router-dom";
 import { smallImage } from "../Utils";
 
 const Game = ({ gameId, gameName, released, image }) => {
+  const stringGameId = gameId.toString();
+
   //load Details
   const dispatch = useDispatch();
   const handleGameDetail = () => {
     document.body.style.overflow = "hidden";
     dispatch(loadDetail(gameId));
+    console.log(typeof stringGameId);
   };
   // Link to /game/gameId when click the game
   return (
@@ -22,11 +25,16 @@ const Game = ({ gameId, gameName, released, image }) => {
       onClick={() => {
         handleGameDetail();
       }}
+      layoutId={stringGameId}
     >
       <Link to={`/game/${gameId}`}>
-        <h3>{gameName}</h3>
+        <motion.h3 layoutId={`title ${stringGameId}`}>{gameName}</motion.h3>
         <p>{released}</p>
-        <img src={smallImage(image, 640)} alt={gameName} />
+        <motion.img
+          layoutId={`image ${stringGameId}`}
+          src={smallImage(image, 640)}
+          alt={gameName}
+        />
       </Link>
     </StyledGame>
   );

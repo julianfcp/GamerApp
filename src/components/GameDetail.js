@@ -10,8 +10,9 @@ import { useHistory } from "react-router-dom";
 // Utils
 import { smallImage } from "../Utils";
 
-const GameDetail = () => {
+const GameDetail = ({ pathId }) => {
   const history = useHistory();
+  console.log(typeof pathId);
   // Exit Detail
   const exitHandler = (e) => {
     if (e.target.classList.contains("cardshadow")) {
@@ -25,10 +26,10 @@ const GameDetail = () => {
     <>
       {!isLoading ? (
         <CardShadow className="cardshadow" onClick={exitHandler}>
-          <Detail>
+          <Detail layoutId={pathId}>
             <Stats>
               <div className="rating">
-                <h3>{game.name}</h3>
+                <motion.h3 layoutId={`title ${pathId}`}>{game.name}</motion.h3>
                 <p>Rating: {game.rating}</p>
               </div>
               <Info>
@@ -41,8 +42,9 @@ const GameDetail = () => {
               </Info>
             </Stats>
             <Media>
-              <img
-                src={smallImage(game.background_image, 720)}
+              <motion.img
+                layoutId={`image ${pathId}`}
+                src={smallImage(game.background_image, 640)}
                 alt={game.background_image}
               />
             </Media>
@@ -51,7 +53,7 @@ const GameDetail = () => {
               {screen.results.map((item) => (
                 <img
                   key={item.id}
-                  src={smallImage(item.image, 720)}
+                  src={smallImage(item.image, 640)}
                   alt="game"
                 />
               ))}
