@@ -23,7 +23,7 @@ const Home = () => {
 
   //get Data from the store
   // games is the name of the reducer when we use combineReducers
-  const { popular, newGames, upComing, isLoading } = useSelector(
+  const { popular, newGames, upComing, searched, isLoading } = useSelector(
     (state) => state.games
   );
 
@@ -35,7 +35,26 @@ const Home = () => {
             <AnimatePresence>
               {pathId && <GameDetail pathId={pathId} />}
             </AnimatePresence>
-            <h2> Upcoming Games</h2>
+            {searched.length ? (
+              <div className="searchGames">
+                <h3> Search Results</h3>
+                <Games>
+                  {searched.map((game) => (
+                    <Game
+                      key={game.id}
+                      gameName={game.name}
+                      released={game.released}
+                      gameId={game.id}
+                      image={game.background_image}
+                    />
+                  ))}
+                </Games>
+              </div>
+            ) : (
+              ""
+            )}
+
+            <h3> Upcoming Games</h3>
             <Games>
               {upComing.map((game) => (
                 <Game
@@ -47,7 +66,7 @@ const Home = () => {
                 />
               ))}
             </Games>
-            <h2> Popular Games</h2>
+            <h3> Popular Games</h3>
             <Games>
               {popular.map((game) => (
                 <Game
@@ -59,7 +78,7 @@ const Home = () => {
                 />
               ))}
             </Games>
-            <h2> New Games</h2>
+            <h3> New Games</h3>
             <Games>
               {newGames.map((game) => (
                 <Game
@@ -89,9 +108,9 @@ const GameList = styled(motion.div)`
 const Games = styled(motion.div)`
   min-height: 80vh;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   grid-column-gap: 3rem;
-  grid-row-gap: 5rem;
+  grid-row-gap: 2rem;
 `;
 
 export default Home;

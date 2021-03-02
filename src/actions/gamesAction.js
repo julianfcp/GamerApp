@@ -1,5 +1,10 @@
 import axios from "axios";
-import { popularGamesURL, upcomingGamesURL, newGamesURL } from "../api";
+import {
+  popularGamesURL,
+  upcomingGamesURL,
+  newGamesURL,
+  searchGameURL,
+} from "../api";
 
 // Action creator
 // when using thunk to async calls we use another function to return
@@ -20,5 +25,23 @@ export const loadGames = () => async (dispatch) => {
       upComing: upcomingGamesData.data.results,
       newGames: newGamesData.data.results,
     },
+  });
+};
+
+export const searchGames = (game_name) => async (dispatch) => {
+  // search url
+  const searchedGames = await axios.get(searchGameURL(game_name));
+
+  dispatch({
+    type: "FETCH_SEARCHED",
+    payload: {
+      searched: searchedGames.data.results,
+    },
+  });
+};
+
+export const clearSearchGames = () => async (dispatch) => {
+  dispatch({
+    type: "CLEAR_SEARCH",
   });
 };

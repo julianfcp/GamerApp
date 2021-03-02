@@ -17,6 +17,7 @@ const GlobalStyles = createGlobalStyle`
     body {
         font-family: 'Montserrat', sans-serif;
         width: 100%;
+        //background: linear-gradient(to top, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0));
     }
     h2 {
         font-size: 3rem;

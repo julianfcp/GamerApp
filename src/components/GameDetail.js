@@ -2,17 +2,16 @@
 import styled from "styled-components";
 import { motion } from "framer-motion";
 // Components
-import Loading from "../components/Loading";
+//import Loading from "../components/Loading";
 //Redux
 import { useSelector } from "react-redux";
 // Location History
 import { useHistory } from "react-router-dom";
 // Utils
-import { smallImage } from "../Utils";
+import { smallImage, PlatformIcon, getStars } from "../Utils";
 
 const GameDetail = ({ pathId }) => {
   const history = useHistory();
-  console.log(typeof pathId);
   // Exit Detail
   const exitHandler = (e) => {
     if (e.target.classList.contains("cardshadow")) {
@@ -24,19 +23,26 @@ const GameDetail = ({ pathId }) => {
   const { game, screen, isLoading } = useSelector((state) => state.gameDetail);
   return (
     <>
-      {!isLoading ? (
+      {!isLoading && (
         <CardShadow className="cardshadow" onClick={exitHandler}>
           <Detail layoutId={pathId}>
             <Stats>
               <div className="rating">
                 <motion.h3 layoutId={`title ${pathId}`}>{game.name}</motion.h3>
                 <p>Rating: {game.rating}</p>
+                {getStars(game.rating)}
               </div>
               <Info>
                 <h3>Platforms</h3>
                 <Platforms>
                   {game.platforms.map((item) => (
-                    <h3 key={item.platform.id}>{item.platform.name}</h3>
+                    <motion.img
+                      animate={!isLoading ? "open" : "closed"}
+                      variants={variants}
+                      key={item.platform.id}
+                      src={PlatformIcon(item.platform.name)}
+                      alt={item.platform.name}
+                    />
                   ))}
                 </Platforms>
               </Info>
@@ -44,7 +50,7 @@ const GameDetail = ({ pathId }) => {
             <Media>
               <motion.img
                 layoutId={`image ${pathId}`}
-                src={smallImage(game.background_image, 640)}
+                src={smallImage(game.background_image, 1280)}
                 alt={game.background_image}
               />
             </Media>
@@ -60,8 +66,8 @@ const GameDetail = ({ pathId }) => {
             </Gallery>
           </Detail>
         </CardShadow>
-      ) : (
-        <Loading />
+        // ) : (
+        // <Loading />
       )}
     </>
   );
@@ -76,6 +82,7 @@ const CardShadow = styled(motion.div)`
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 10;
   &::-webkit-scrollbar {
     width: 0.5rem;
   }
@@ -87,12 +94,23 @@ const CardShadow = styled(motion.div)`
   }
 `;
 
+const variants = {
+  open: {
+    opacity: 1,
+    scale: [1, 2, 2, 1, 1],
+    rotate: [0, 0, 270, 270, 0],
+    borderRadius: ["20%", "20%", "50%", "50%", "20%"],
+  },
+  closed: { opacity: 0 },
+};
+
 const Detail = styled(motion.div)`
   width: 80%;
   border-radius: 1rem;
   padding: 2rem 5rem;
   background: white;
   position: absolute;
+  z-index: 10;
   left: 10%;
   color: black;
   img {
@@ -104,6 +122,11 @@ const Stats = styled(motion.div)`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  img {
+    width: 2rem;
+    height: 2rem;
+    display: inline;
+  }
 `;
 
 const Info = styled(motion.div)`

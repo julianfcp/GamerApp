@@ -17,7 +17,6 @@ const Game = ({ gameId, gameName, released, image }) => {
   const handleGameDetail = () => {
     document.body.style.overflow = "hidden";
     dispatch(loadDetail(gameId));
-    console.log(typeof stringGameId);
   };
   // Link to /game/gameId when click the game
   return (
@@ -31,7 +30,7 @@ const Game = ({ gameId, gameName, released, image }) => {
         <motion.h3 layoutId={`title ${stringGameId}`}>{gameName}</motion.h3>
         <p>{released}</p>
         <motion.img
-          layoutId={`image ${stringGameId}`}
+          layout={`image ${stringGameId}`}
           src={smallImage(image, 640)}
           alt={gameName}
         />
