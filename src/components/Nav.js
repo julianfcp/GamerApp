@@ -8,6 +8,8 @@ import styled from "styled-components";
 import { motion } from "framer-motion";
 // Logo
 import logo from "../img/GamerLogo.png";
+// animations
+import { fadeIn } from "../animations";
 
 const Nav = () => {
   const [inputSearch, setInputSearch] = useState();
@@ -20,7 +22,7 @@ const Nav = () => {
     dispatch(clearSearchGames());
   };
   return (
-    <StyledNav>
+    <StyledNav variants={fadeIn} initial="hidden" animate="show">
       <Logo onClick={handleHomePage}>
         <h2>GamerApp</h2>
         <img alt="logo" src={logo}></img>

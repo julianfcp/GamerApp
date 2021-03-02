@@ -8,6 +8,8 @@ import { loadDetail } from "../actions/detailAction";
 import { Link } from "react-router-dom";
 // Utils
 import { smallImage } from "../Utils";
+// Animations
+import { popUp } from "../animations";
 
 const Game = ({ gameId, gameName, released, image }) => {
   const stringGameId = gameId.toString();
@@ -25,6 +27,9 @@ const Game = ({ gameId, gameName, released, image }) => {
         handleGameDetail();
       }}
       layoutId={stringGameId}
+      variants={popUp}
+      initial="hidden"
+      animate="show"
     >
       <Link to={`/game/${gameId}`}>
         <motion.h3 layoutId={`title ${stringGameId}`}>{gameName}</motion.h3>

@@ -12,9 +12,10 @@ const Loading = () => {
 };
 
 const Imageloading = styled(motion.div)`
-  width: 87%;
   min-height: 100vh;
   position: fixed;
+  right: 0;
+  left: 0;
 `;
 
 export default Loading;
