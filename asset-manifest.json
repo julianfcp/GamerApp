@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.js": "/GamerApp/static/js/main.bac63535.chunk.js",
-    "main.js.map": "/GamerApp/static/js/main.bac63535.chunk.js.map",
+    "main.js": "/GamerApp/static/js/main.17f1200d.chunk.js",
+    "main.js.map": "/GamerApp/static/js/main.17f1200d.chunk.js.map",
     "runtime-main.js": "/GamerApp/static/js/runtime-main.1d7cae48.js",
     "runtime-main.js.map": "/GamerApp/static/js/runtime-main.1d7cae48.js.map",
     "static/js/2.c18c449e.chunk.js": "/GamerApp/static/js/2.c18c449e.chunk.js",
@@ -22,6 +22,6 @@
   "entrypoints": [
     "static/js/runtime-main.1d7cae48.js",
     "static/js/2.c18c449e.chunk.js",
-    "static/js/main.bac63535.chunk.js"
+    "static/js/main.17f1200d.chunk.js"
   ]
 }
